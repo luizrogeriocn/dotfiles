@@ -1,0 +1,11 @@
+[color]
+ ui = true
+[user]
+ name = Luiz Rogério
+ email = luizrogeriocn@gmail.com
+[alias]
+ co = checkout
+ s = status
+ lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
+ cane = commit --amend --no-edit
+ pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"

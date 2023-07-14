@@ -67,7 +67,7 @@ link_dotfiles() {
     # Reset IFS back
     IFS=$OIFS
 
-    source "${HOME}/.zshrc"
+    #source "${HOME}/.bashrc"
 
     [[ $? ]] && _success "All files have been copied"
   fi
@@ -121,12 +121,13 @@ install_zsh() {
 }
 
 install() {
-  download_dotfiles
-  link_dotfiles
   install_silversearcher
   install_fzf
   install_fdfind
   install_zsh
+
+  download_dotfiles
+  link_dotfiles
 }
 
 install

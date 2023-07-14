@@ -1,5 +1,16 @@
 # .dotfiles
 
+Paste this into terminal if you are luizrogeriocn :)
+
+```bash
+bash -c "$(curl -#fL https://raw.githubusercontent.com/luizrogeriocn/.dotfiles/main/install)"
+```
+
+For the time being this only downloads the repository and creates symlinks for the files.
+I still need to add the instalation of my most used packages (listed below).
+
+---
+
 Install AG (the silversearcher)
 apt-get install silversearcher-ag
 
@@ -19,12 +30,3 @@ chsh -s $(which zsh)
 Install OhMyZsh
 export ZSH="/home/roger/.oh-my-zsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-Create symbolic link to vimrc with
-ln -s /home/roger/.dotfiles/.vimrc /home/roger/.vimrc
-
-Create Symbolic link to gitconfig
-ln -s /home/roger/.dotfiles/.gitconfig /home/roger/.gitconfig
-
-Create symbolic link to zshrc
-ln -s /home/roger/.dotfiles/.zshrc /home/roger/.zshrc

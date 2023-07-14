@@ -8,4 +8,7 @@
  s = status
  lol = log --graph --decorate --pretty=oneline --abbrev-commit --all
  cane = commit --amend --no-edit
- pushup = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+ pf = push --force-with-lease
+ fuck = "!git push --set-upstream origin $(git symbolic-ref --short HEAD)"
+[core]
+	excludesFile = ~/.gitignore_global

@@ -73,9 +73,60 @@ link_dotfiles() {
   fi
 }
 
+install_silversearcher() {
+  if ! type -P 'ag' &> /dev/null; then
+    _process "→ Installing silversearcher-ag"
+
+    pkg install silversearcher-ag
+
+    [[ $? ]] \
+    && _success "Installed silversearcher-ag"
+  fi
+}
+
+install_fzf() {
+  if ! type -P 'fzf' &> /dev/null; then
+    _process "→ Installing fzf"
+
+    pkg install fzf
+
+    [[ $? ]] \
+    && _success "Installed fzf"
+  fi
+}
+
+install_fdfind() {
+  if ! type -P 'fd' &> /dev/null; then
+    _process "→ Installing fdfind"
+
+    pkg install fd
+
+    [[ $? ]] \
+    && _success "Installed fdfind"
+  fi
+}
+
+install_zsh() {
+  if ! type -P 'zsh' &> /dev/null; then
+    _process "→ Installing zsh"
+
+    pkg install zsh
+
+    _process "→ Installing ohmyzsh"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+    [[ $? ]] \
+    && _success "Installed zsh"
+  fi
+}
+
 install() {
   download_dotfiles
   link_dotfiles
+  install_silversearcher
+  install_fzf
+  install_fdfind
+  install_zsh
 }
 
 install

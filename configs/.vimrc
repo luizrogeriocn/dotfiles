@@ -15,8 +15,11 @@ call plug#end()
 " Base16 theme setup
 set termguicolors
 set background=dark
-let base16colorspace=256
-colorscheme base16-solarized-dark
+if exists('$BASE16_THEME')
+      \ && (!exists('g:colors_name') || g:colors_name != 'base16-$BASE16_THEME')
+    let base16colorspace=256
+    colorscheme base16-$BASE16_THEME
+endif
 
 let g:ag_working_path_mode="r"
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
@@ -55,9 +58,9 @@ set showcmd
 set scrolloff=4
 set path+=**
 set rtp+=/home/roger/.fzf
-command FV call fzf#run({'source': 'fdfind', 'sink': 'vsp', 'options': '-m', 'down': '30%'})
-command FS call fzf#run({'source': 'fdfind', 'sink': 'sp', 'options': '-m', 'down': '30%'})
-command FE call fzf#run({'source': 'fdfind', 'sink': 'e', 'options': '-m', 'down': '30%'})
+command FV call fzf#run({'source': 'fd', 'sink': 'vsp', 'options': '-m', 'down': '30%'})
+command FS call fzf#run({'source': 'fd', 'sink': 'sp', 'options': '-m', 'down': '30%'})
+command FE call fzf#run({'source': 'fd', 'sink': 'e', 'options': '-m', 'down': '30%'})
 command GV call fzf#run({'source': 'git status --porcelain | sed s/^...//', 'sink': 'vsp', 'options': '-m', 'down': '30%'})
 command GS call fzf#run({'source': 'git status --porcelain | sed s/^...//', 'sink': 'sp', 'options': '-m', 'down': '30%'})
 command GE call fzf#run({'source': 'git status --porcelain | sed s/^...//', 'sink': 'e', 'options': '-m', 'down': '30%'})

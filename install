@@ -32,6 +32,7 @@ download_dotfiles() {
   # Change to the dotfiles directory
   cd "${DIR}"
 }
+
 link_dotfiles() {
   # symlink files to the HOME directory.
   if [[ -f "${DIR}/opt/files" ]]; then
@@ -73,60 +74,46 @@ link_dotfiles() {
   fi
 }
 
-install_silversearcher() {
-  if ! type -P 'ag' &> /dev/null; then
-    _process "→ Installing silversearcher-ag"
+install_packages() {
+  if [[ -f "${DIR}/opt/packages" ]]; then
+    _process "→ Installing packages in /configs"
 
-    pkg install silversearcher-ag
+    # Set variable for list of files
+    packages_file="${DIR}/opt/packages"
 
-    [[ $? ]] \
-    && _success "Installed silversearcher-ag"
-  fi
-}
+    # Store IFS separator within a temp variable
+    OIFS=$IFS
+    # Set the separator to a carriage return & a new line break
+    # read in passed-in file and store as an array
+    IFS=$'\r\n'
+    packages=($(cat "${packages_file}"))
 
-install_fzf() {
-  if ! type -P 'fzf' &> /dev/null; then
-    _process "→ Installing fzf"
+    # Loop through array of files
+    for index in ${!packages[*]}
+    do
+      for package in ${packages[$index]}
+      do
+        if ! type -P ${package} &> /dev/null; then
+          _process "→ Installing ${package}"
 
-    pkg install fzf
+          pkg install ${package}
 
-    [[ $? ]] \
-    && _success "Installed fzf"
-  fi
-}
+          [[ $? ]] \
+          && _success "Installed ${package}"
+        fi
+      done
+    done
 
-install_fdfind() {
-  if ! type -P 'fd' &> /dev/null; then
-    _process "→ Installing fdfind"
+    # Reset IFS back
+    IFS=$OIFS
 
-    pkg install fd
-
-    [[ $? ]] \
-    && _success "Installed fdfind"
-  fi
-}
-
-install_zsh() {
-  if ! type -P 'zsh' &> /dev/null; then
-    _process "→ Installing zsh"
-
-    pkg install zsh
-
-    _process "→ Installing ohmyzsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-    [[ $? ]] \
-    && _success "Installed zsh"
+    [[ $? ]] && _success "All packages have been installed"
   fi
 }
 
 install() {
-  install_silversearcher
-  install_fzf
-  install_fdfind
-  install_zsh
-
   download_dotfiles
+  install_packages
   link_dotfiles
 }
 

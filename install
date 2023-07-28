@@ -131,10 +131,15 @@ install_base16_shell() {
   git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 }
 
+install_oh_my_zsh() {
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+}
+
 install() {
   download_dotfiles
   install_packages
   install_base16_shell
+  install_oh_my_zsh
   link_dotfiles
 }
 

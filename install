@@ -4,6 +4,22 @@ GITHUB_USER=luizrogeriocn
 GITHUB_REPO=".dotfiles"
 DIR="${HOME}/../usr/local/opt/${GITHUB_REPO}"
 
+case $(uname -a | tr '[:upper:]' '[:lower:]') in
+  *fedora*)
+    DISTRO_NAME=fedora
+    PKG_MANAGER=dnf
+    ;;
+  *ubuntu*)
+    DISTRO_NAME=ubuntu
+    PKG_MANAGER=apt
+    ;;
+  *)
+    DISTRO_NAME=notset
+    ;;
+esac
+
+echo "${DISTRO_NAME}"
+
 _process() {
   echo "$(date) PROCESSING:  $@" >> $LOG
   printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
@@ -96,7 +112,7 @@ install_packages() {
         if ! type -P ${package} &> /dev/null; then
           _process "→ Installing ${package}"
 
-          pkg install ${package}
+          echo "$(sudo ${PKG_MANAGER} install ${package})"
 
           [[ $? ]] \
           && _success "Installed ${package}"

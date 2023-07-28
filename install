@@ -127,9 +127,14 @@ install_packages() {
   fi
 }
 
+install_base16_shell() {
+  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+}
+
 install() {
   download_dotfiles
   install_packages
+  install_base16_shell
   link_dotfiles
 }
 

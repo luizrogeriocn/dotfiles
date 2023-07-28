@@ -16,3 +16,4 @@ Programs I love 🫰
 - fzf
 - zsh (Make it your default shell: chsh -s $(which zsh))
 - ohmyzsh
+- vim

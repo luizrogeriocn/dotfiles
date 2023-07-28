@@ -137,10 +137,10 @@ install_oh_my_zsh() {
 
 install() {
   download_dotfiles
+  link_dotfiles
   install_packages
   install_base16_shell
   install_oh_my_zsh
-  link_dotfiles
 }
 
 install

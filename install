@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 LOG="dotfiles.log"
 GITHUB_USER=luizrogeriocn
-GITHUB_REPO=".dotfiles"
-DIR="${HOME}/../usr/local/opt/${GITHUB_REPO}"
+GITHUB_REPO="dotfiles"
+DIR="${HOME}/${GITHUB_REPO}"
 
 case $(uname -a | tr '[:upper:]' '[:lower:]') in
   *fedora*)

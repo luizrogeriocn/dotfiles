@@ -132,6 +132,7 @@ install_base16_shell() {
 }
 
 install_oh_my_zsh() {
+  chsh -s $(which zsh))
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 

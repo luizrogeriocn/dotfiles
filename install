@@ -112,7 +112,7 @@ install_packages() {
         if ! type -P ${package} &> /dev/null; then
           _process "→ Installing ${package}"
 
-          sudo ${PKG_MANAGER} install ${package}
+          sudo ${PKG_MANAGER} install -y ${package}
 
           [[ $? ]] \
           && _success "Installed ${package}"

@@ -9,10 +9,6 @@ case $(uname -a | tr '[:upper:]' '[:lower:]') in
     DISTRO_NAME=fedora
     PKG_MANAGER=dnf
     ;;
-  *ubuntu*)
-    DISTRO_NAME=ubuntu
-    PKG_MANAGER=apt
-    ;;
   *)
     DISTRO_NAME=notset
     PKG_MANAGER=apt

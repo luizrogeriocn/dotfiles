@@ -15,6 +15,7 @@ case $(uname -a | tr '[:upper:]' '[:lower:]') in
     ;;
   *)
     DISTRO_NAME=notset
+    PKG_MANAGER=apt
     ;;
 esac
 

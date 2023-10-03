@@ -145,6 +145,10 @@ install_fzf() {
 ~/.fzf/install
 }
 
+install_homebrew() {
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
 install() {
   download_dotfiles
   link_dotfiles
@@ -152,13 +156,15 @@ install() {
   if [ $OS_NAME="macos" ]
   then
     echo "This is macOS"
+    install_homebrew
   else
+    echo "This is probably Linux"
     install_packages
-    install_base16_shell
-    install_fzf
-    install_oh_my_zsh
   fi
+
+  install_base16_shell
+  install_fzf
+  install_oh_my_zsh
 }
 
 install
-

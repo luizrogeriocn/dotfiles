@@ -5,11 +5,17 @@ GITHUB_REPO="dotfiles"
 DIR="${HOME}/${GITHUB_REPO}"
 
 case $(uname -a | tr '[:upper:]' '[:lower:]') in
+  *Darwin*)
+    OS_NAME=macos
+    DISTRO_NAME=notset
+    PKG_MANAER=brew
   *fedora*)
+    OS_NAME=linux
     DISTRO_NAME=fedora
     PKG_MANAGER=dnf
     ;;
   *)
+    OS_NAME=linux
     DISTRO_NAME=notset
     PKG_MANAGER=apt
     ;;
@@ -141,10 +147,16 @@ install_fzf() {
 install() {
   download_dotfiles
   link_dotfiles
-  install_packages
-  install_base16_shell
-  install_fzf
-  install_oh_my_zsh
+
+  if [ $OS_NAME="macos" ]
+  then
+    echo "This is macOS"
+  else
+    install_packages
+    install_base16_shell
+    install_fzf
+    install_oh_my_zsh
+  fi
 }
 
 install

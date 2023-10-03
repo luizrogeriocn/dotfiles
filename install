@@ -5,7 +5,7 @@ GITHUB_REPO="dotfiles"
 DIR="${HOME}/${GITHUB_REPO}"
 
 case $(uname -a | tr '[:upper:]' '[:lower:]') in
-  *Darwin*)
+  *darwin*)
     OS_NAME=macos
     DISTRO_NAME=notset
     PKG_MANAER=brew
@@ -146,7 +146,16 @@ install_fzf() {
 }
 
 install_homebrew() {
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if ! type -P brew &> /dev/null; then
+    _process "→ Installing Homebrew"
+
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    [[ $? ]] \
+    && _success "Installed Homebrew"
+  else
+    _process "→ Homebrew was already installed"
+  fi
 }
 
 install() {
@@ -157,14 +166,32 @@ install() {
   then
     echo "This is macOS"
     install_homebrew
+
+    brew install ag
+    brew install fd
+    brew install git
+    brew install vim
   else
     echo "This is probably Linux"
     install_packages
   fi
 
-  install_base16_shell
-  install_fzf
-  install_oh_my_zsh
+  echo "Install base_16, fzf and oh_my_zsh? (y/n): "
+  read install_extras
+
+  if [ $install_extras = "y" ]
+  then
+    _process "→ Installing extra packages..."
+
+    install_base16_shell
+    install_fzf
+    install_oh_my_zsh
+
+    [[ $? ]] \
+    && _success "Installed extra packages"
+  else
+    echo "Extra packages were skipped"
+  fi
 }
 
 install

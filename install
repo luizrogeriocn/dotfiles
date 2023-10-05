@@ -15,6 +15,10 @@ case $(uname -a | tr '[:upper:]' '[:lower:]') in
     DISTRO_NAME=fedora
     PKG_MANAGER=dnf
     ;;
+  *android*)
+    OS_NAME=linux
+    DISTRO_NAME=termux
+    PKG_MANAGER=pkg
   *)
     OS_NAME=linux
     DISTRO_NAME=notset

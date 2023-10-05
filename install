@@ -19,6 +19,7 @@ case $(uname -a | tr '[:upper:]' '[:lower:]') in
     OS_NAME=linux
     DISTRO_NAME=termux
     PKG_MANAGER=pkg
+    ;;
   *)
     OS_NAME=linux
     DISTRO_NAME=notset

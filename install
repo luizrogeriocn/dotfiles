@@ -167,7 +167,7 @@ install() {
   download_dotfiles
   link_dotfiles
 
-  if [ $OS_NAME="macos" ]
+  if [ $OS_NAME = "macos" ]
   then
     echo "This is macOS"
     install_homebrew
